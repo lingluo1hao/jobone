@@ -22,4 +22,9 @@
         <include refid="BASE_TABLE"/>
         WHERE name = #{name}
     </select>
+    
+    <select id="findAllEmail" resultType="com.luo.jobtest.jobone.entity.Email">
+        select a.`name`,b.id,b.email from sysuser a LEFT JOIN `user` b
+on a.`name`=b.`name`
+    </select>
 </mapper>

@@ -1,10 +1,12 @@
 package com.luo.jobtest.jobone.schedule;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.luo.jobtest.jobone.entity.Email;
 import com.luo.jobtest.jobone.entity.SysUser;
 import com.luo.jobtest.jobone.entity.User;
+import com.luo.jobtest.jobone.service.EmailService;
 import com.luo.jobtest.jobone.service.SysUserService;
 import com.luo.jobtest.jobone.service.UserService;
-import jdk.nashorn.internal.ir.ContinueNode;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +30,10 @@ public class InsertUserSchedule {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private EmailService emailService;
 
-
+/*
     @Async
     @Transactional(rollbackOn = Exception.class)
     @Scheduled(cron = "0 0/1 * * * ?")
@@ -59,6 +63,34 @@ public class InsertUserSchedule {
         }
 
     }
+*/
+    @Async
+    @Transactional(rollbackOn = Exception.class)
+    @Scheduled(cron = "0 0/1 * * * ?")
+    public void  insertBatchEmail(){
+        List<Email>  listMail =new ArrayList<>();
+        SysUser sysUser =new SysUser();
+        sysUser.setName("22");
+        Page page=new Page(1,50);
+        try{
+            listMail=sysUserService.findALLEmail(page,sysUser);
+        }catch (Exception e){
+            logger.error("查询数据失败");
+            e.printStackTrace();
+        }
+        //logger.info(listMail.toString());
+
+        try {
+            emailService.batchInsert(listMail);
+        }catch (Exception e){
+            logger.error("批量插入数据失败");
+            e.printStackTrace();
+        }
+
+
+
+    }
+
 
 
 }
