@@ -21,6 +21,22 @@ spring:
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
 
+  #thymeleaf配置
+  thymeleaf:
+    mode: HTML5
+    encoding: utf-8
+    servlet:
+      content-type: text/html
+    cache: false
+    prefix: /templates/
+  #rabbitmq配置
+  rabbitmq:
+    host: 192.168.0.108
+    port: 5672
+    username: lxtx_api
+    password: 0VCPB3J3FvM3USZJa1R_XiFwtxH_BCq8
+    virtualHost: /luo_test
+
 mybatis:
   mapper-locations: classpath:mapping/*/*.xml
   type-aliases-package: com.mydream.backstate.*.entity
@@ -32,3 +48,13 @@ pagehelper:
     params: count=countSql
 server:
   port: 8080
+
+
+queue:
+    # from Queue Service
+  prefix: stg-
+  directExchange: direct
+  directNames:
+    push: push
+    #注册添加6x用户队列
+    bcb6xSys: bcb6x-sys

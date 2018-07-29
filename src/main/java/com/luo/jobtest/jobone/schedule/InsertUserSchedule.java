@@ -64,6 +64,8 @@ public class InsertUserSchedule {
 
     }
 */
+
+/*
     @Async
     @Transactional(rollbackOn = Exception.class)
     @Scheduled(cron = "0 0/1 * * * ?")
@@ -91,6 +93,6 @@ public class InsertUserSchedule {
 
     }
 
-
+*/
 
 }
