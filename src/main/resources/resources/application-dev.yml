@@ -1,0 +1,27 @@
+#spring:
+#  zipkin:
+#    base-url: http://176.166.1.53:9455
+#  sleuth:
+#    sampler:
+#      percentage: 1.0
+
+
+spring:
+  datasource:
+    name: mydb
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://176.166.1.53:3306/jinbi_store?useUnicode=true&autoReconnect=true&characterEncoding=utf-8
+    username: mariadb
+    password: gzusys
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+ 
+eureka:
+  client:
+    service-url:
+      defaultZone: http://176.166.1.53:7001/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}   # 在信息列表时显示主机名称
+    prefer-ip-address: true         # 访问的路径变为IP地址
+    
