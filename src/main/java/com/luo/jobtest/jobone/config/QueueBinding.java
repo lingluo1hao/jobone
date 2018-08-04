@@ -42,6 +42,7 @@ public class QueueBinding {
                 return new FanoutExchange(getExchange());
             case ExchangeTypes.TOPIC:
                 return new TopicExchange(getExchange());
+                default:
         }
 
         return null;
